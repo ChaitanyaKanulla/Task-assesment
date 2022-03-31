@@ -1,0 +1,16 @@
+For example  example if CPU usage is over 70%, 
+  increase the number of pods and if it is below 30% reduce the number of pods
+
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: My app
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: My app
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
