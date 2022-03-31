@@ -1,0 +1,33 @@
+Need to create a deployment file to keep our container application in k8s 
+
+Created a deployment.yaml file and kept our requirement 
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+      containers:
+      - name: hello-from
+        image: vad1mo/hello-world-rest
+        ports:
+          - name: http
+            containerPort: 50
+      terminationGracePeriodSeconds: 1
+
+
+
+kubectl apply - f my deployment.yaml 
